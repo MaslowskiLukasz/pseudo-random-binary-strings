@@ -1,27 +1,15 @@
-import math
+import test
+import generator
+import files
 
 
-def generateBBS(blum_number, seed, length):
-  arr = []
-  last_number = (seed * seed) % blum_number
-  arr.append(last_number % 2)
-
-  for i in range(1, length):
-    print(last_number)
-    last_number = (last_number * last_number) % blum_number
-    arr.append(last_number % 2)
-
-  print(arr)
-  print(len(arr))
-  return arr
-
-
-n = 121
+result_file_name = "results.txt"
+n = 789
 a = 5
-r = 1024
+r = 20000
 
-arr = generateBBS(n, a, r)
+result = generator.generate_BBS(n, a, r)
+files.save_to_file(result_file_name, result)
 
-
-with open("results.txt", "w") as file:
-  file.write(str(arr))
+print(test.single_bit_test(result))
+print(test.series_test(result))
