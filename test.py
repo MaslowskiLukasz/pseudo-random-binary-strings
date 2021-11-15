@@ -78,12 +78,12 @@ def series_test(data):
     elif data[i] == "0" and data[i+1] == "0":
       current_zeros_series_length += 1 
   
-  print(ones_series_counters)
-  print(zeros_series_counters)
-  result = check_ranges(ones_series_counters, zeros_series_counters)
+  #print(ones_series_counters)
+  #print(zeros_series_counters)
+  result = check_series_ranges(ones_series_counters, zeros_series_counters)
   return result
 
-def check_ranges(ones, zeros):
+def check_series_ranges(ones, zeros):
   result = False
   if (2315 < ones[0] < 2685 and
     1114 < ones[1] < 1386 and
