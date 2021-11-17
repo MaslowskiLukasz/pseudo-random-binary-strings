@@ -1,5 +1,6 @@
 import pandas as pd
 from pandas import Series
+import streamlit as st
 
 def run_all_tests(data):
   single_bit_result = single_bit_test(data)
@@ -7,10 +8,10 @@ def run_all_tests(data):
   long_series_result = long_series_test(data)
   poker_result = poker_test(data)
 
-  print(f"single bit: {single_bit_result}")
-  print(f"series: {series_result}")
-  print(f"long series: {long_series_result}")
-  print(f"poker: {poker_result}")
+  st.text(f"single bit: {single_bit_result}")
+  st.text(f"series: {series_result}")
+  st.text(f"long series: {long_series_result}")
+  st.text(f"poker: {poker_result}")
 
   return single_bit_result and series_result and long_series_result and poker_result
 

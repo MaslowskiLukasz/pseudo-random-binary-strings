@@ -9,5 +9,12 @@ def stream_encode(input, blum_number, seed):
     input_value = True if input[i] == "1" else False
     key_value = True if key[i] == "1" else False
     output += str(int(input_value ^ key_value))
+  return output, key
 
+def stream_decode(input, key):
+  output = ""
+  for i in range(0, len(input)):
+    input_value = True if input[i] == "1" else False
+    key_value = True if key[i] == "1" else False
+    output += str(int(input_value ^ key_value))
   return output
