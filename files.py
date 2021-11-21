@@ -22,7 +22,7 @@ def read_from_file(file_name):
 
 def validate_input(data):
   if len(data) != 20_000:
-    print("Wrong input size")
+    st.write("Wrong input size")
     return False
   return True
 

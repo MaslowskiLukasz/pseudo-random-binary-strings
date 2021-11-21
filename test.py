@@ -21,7 +21,8 @@ def single_bit_test(data):
     if data[i] == "1":
       counter += 1
 
-  print(f"number of ones = {counter}")
+  st.write(f"number of ones = {counter}")
+  st.write(f"number of zeros = {len(data) - counter}")
   return 9725 < counter < 10275
 
 def poker_test(data):
@@ -34,6 +35,7 @@ def poker_test(data):
   for x in counters:
     sum += x * x
   test_value = (16/5000) * sum - 5000
+  st.write(f"poker test result: {test_value}")
   return 2.16 < test_value < 46.17
 
 def long_series_test(data):
@@ -79,8 +81,8 @@ def series_test(data):
     elif data[i] == "0" and data[i+1] == "0":
       current_zeros_series_length += 1 
   
-  #print(ones_series_counters)
-  #print(zeros_series_counters)
+  st.write(f"series test - 1: {ones_series_counters}")
+  st.write(f"series test - 0: {zeros_series_counters}")
   result = check_series_ranges(ones_series_counters, zeros_series_counters)
   return result
 

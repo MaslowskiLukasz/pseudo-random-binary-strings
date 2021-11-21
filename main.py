@@ -35,8 +35,12 @@ def encode_msg():
 
   if st.button("Encode message"):
     encoded, key = stream_encoder.stream_encode(input, blum, seed)
-    st.text(f"input: {input}")
-    st.text(f"encoded: {encoded}")
+    st.write("input")
+    st.text(input)
+    st.write("key")
+    st.text(key)
+    st.write("output")
+    st.text(encoded)
     files.save_msg(output_file_name, encoded)
     files.save_key(output_file_name, key)
 
@@ -51,8 +55,12 @@ def decode_msg():
 
   if st.button("Decode message"):
     decoded = stream_encoder.stream_decode(input, key)
-    st.text(f"input: {input}")
-    st.text(f"decoded: {decoded}")
+    st.write("input")
+    st.text(input)
+    st.write("key")
+    st.text(key)
+    st.write("output")
+    st.text(decoded)
     files.save_decoded_msg(name, decoded)
 
 def run_tests():
@@ -62,11 +70,12 @@ def run_tests():
 
   if st.button("Run all tests"):
     st.text(input)
-    st.text(f"summary: {test.run_all_tests(input)}")
+    if(files.validate_input(input)):
+      st.text(f"summary: {test.run_all_tests(input)}")
 
-#p = 1619
-#q = 1231
-#a = 5
+#p = 19319, 21379, 31307, 30047, 36187
+#q = 21247, 43427, 41959, 43787, 50591
+#a = 543213, 52609, 50441, 52561, 52609
 #r = 20_000
 
 if mode == "BBS generator":
