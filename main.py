@@ -8,24 +8,25 @@ import streamlit as st
 
 PROGRAM_MODE = ["...", "BBS generator", "encode message", "decode message", "test random string"]
 
-mode = st.selectbox("Chose mode", PROGRAM_MODE)
+mode = st.selectbox("Select mode", PROGRAM_MODE)
 
 def create_random_string():
-  p = st.number_input("p", step=1)
-  q = st.number_input("q", step=1)
+  p = st.number_input("p", step=1, value=36187)
+  q = st.number_input("q", step=1, value=50591)
   blum = p * q
-  seed = st.number_input("seed", step=1)
-  length = st.number_input("length", step=1)
+  seed = st.number_input("seed", step=1, value=52609)
+  length = st.number_input("length", step=1, value=20_000)
   result_file_name = st.text_input("Save results to file")
   if st.button("Generate and save"):
     result = generator.generate_BBS(blum, seed, length)
-    st.text(f"create_random: {result}")
+    st.write("Random")
+    st.text(result)
     files.save_random(result_file_name, result)
 
 def encode_msg():
-  p = st.number_input("p", step=1)
-  q = st.number_input("q", step=1)
-  seed = st.number_input("seed", step=1)
+  p = st.number_input("p", step=1, value=36187)
+  q = st.number_input("q", step=1, value=50591)
+  seed = st.number_input("seed", step=1, value=52609)
   blum = p * q
 
   file_list = os.listdir(files.INPUT_MSG_DIR)
@@ -36,11 +37,11 @@ def encode_msg():
   if st.button("Encode message"):
     encoded, key = stream_encoder.stream_encode(input, blum, seed)
     st.write("input")
-    st.text(input)
+    st.markdown(f"`{input}`")
     st.write("key")
-    st.text(key)
+    st.markdown(f"`{key}`")
     st.write("output")
-    st.text(encoded)
+    st.markdown(f"`{encoded}`")
     files.save_msg(output_file_name, encoded)
     files.save_key(output_file_name, key)
 
@@ -56,11 +57,11 @@ def decode_msg():
   if st.button("Decode message"):
     decoded = stream_encoder.stream_decode(input, key)
     st.write("input")
-    st.text(input)
+    st.markdown(f"`{input}`")
     st.write("key")
-    st.text(key)
+    st.markdown(f"`{key}`")
     st.write("output")
-    st.text(decoded)
+    st.markdown(f"`{decoded}`")
     files.save_decoded_msg(name, decoded)
 
 def run_tests():
